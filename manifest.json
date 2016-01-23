@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["minify_article.js", "adj.js", "adv.js"]
+      "js": ["minify_article.js", "nouns.js", "verbs.js", "adj.js", "adv.js"]
     }
   ]
 }

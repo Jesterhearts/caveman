@@ -169,7 +169,7 @@ function do_minify() {
 
    for(var i = 0; i < paras.length; i++) {
       var para = paras[i].innerHTML;
-      var split_para = para.split(/(\s+|[.,\/#!$%\^&\*;:{}=\-_`~()])/);
+      var split_para = para.split(/(\s+|[.,!;:~()])/);
       var tokens = split_para.filter(is_allowed);
       paras[i].innerHTML = tokens.join('');
    }

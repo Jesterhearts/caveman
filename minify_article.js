@@ -161,7 +161,7 @@ preps_and_articles = [
 ];
 
 function is_allowed(word) {
-   return adj.indexOf(word.toLowerCase()) == -1 && adv.indexOf(word.toLowerCase()) == -1 && preps_and_articles.indexOf(word.toLowerCase()) == -1;
+   return adj.indexOf(word) == -1 && adv.indexOf(word) == -1 && preps_and_articles.indexOf(word) == -1;
 }
 
 function do_minify() {

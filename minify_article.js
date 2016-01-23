@@ -3,8 +3,32 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       return;
    }
 
-   do_minify();
+   minify_page();
 });
+
+allowed_nodes = ["P", "LI"];
+old_node = null
+old_text = null
+
+window.onmouseout = function(e) {
+   if(!old_text || !old_node) {
+      return;
+   }
+
+   old_node.innerHTML = old_text;
+   old_node = null;
+   old_text = null;
+}
+
+window.onmouseover = function(e) {
+   if(allowed_nodes.indexOf(e.target.nodeName) == -1) {
+      return;
+   }
+
+   old_node = e.target;
+   old_text = old_node.innerHTML;
+   old_node.innerHTML = do_minify(old_node);
+};
 
 preps_and_articles = [
    "a",
@@ -168,14 +192,18 @@ function is_allowed(word) {
    || verbs.indexOf(word) != -1;
 }
 
-function do_minify() {
+function do_minify(node) {
+   var text = node.innerHTML;
+   var split_para = text.split(/(\s+|[.,!;:~()])/);
+   var tokens = split_para.filter(is_allowed);
+   return tokens.join('');
+}
+
+function minify_page() {
    var paras = document.body.getElementsByTagName('p');
 
    for(var i = 0; i < paras.length; i++) {
-      var para = paras[i].innerHTML;
-      var split_para = para.split(/(\s+|[.,!;:~()])/);
-      var tokens = split_para.filter(is_allowed);
-      paras[i].innerHTML = tokens.join('');
+      paras[i].innerHTML = do_minify(paras[i]);
    }
 }
 

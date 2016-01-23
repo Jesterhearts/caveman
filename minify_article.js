@@ -169,9 +169,9 @@ function do_minify() {
 
    for(var i = 0; i < paras.length; i++) {
       var para = paras[i].innerHTML;
-      var split_para = para.split(/\s+|[[:punct:]]/);
+      var split_para = para.split(/(\s+|[.,\/#!$%\^&\*;:{}=\-_`~()])/);
       var tokens = split_para.filter(is_allowed);
-      paras[i].innerHTML = tokens.join(' ');
+      paras[i].innerHTML = tokens.join('');
    }
 }
 

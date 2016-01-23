@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Caveman",
+  "description": "Simplifies text on the webpage",
+  "version": "0.1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["minify_article.js", "adj.js", "adv.js"]
+    }
+  ]
+}
